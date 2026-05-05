@@ -1,9 +1,11 @@
 import "./Sidebar.css";
 import { useContext, useEffect, useState } from "react";
 import { MyContext } from "./MyContext.jsx";
+import { useAuth } from "./AuthContext.jsx";
 import { v1 as uuidv1 } from "uuid";
 
 function Sidebar() {
+    const { user, logout } = useAuth();
     const {
         allThreads,
         setAllThreads,
@@ -132,8 +134,17 @@ function Sidebar() {
                     ))}
                 </ul>
 
-                <div className="sign">
-                    <p>By SYNAPZ &hearts;</p>
+                <div className="user-section">
+                    <div className="user-info">
+                        <span className="username">{user?.username || 'User'}</span>
+                    </div>
+                    <button className="logout-btn" onClick={logout}>
+                        <i className="fa-solid fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                    <div className="sign">
+                        <p>By SYNAPZ &hearts;</p>
+                    </div>
                 </div>
             </section>
         </>
